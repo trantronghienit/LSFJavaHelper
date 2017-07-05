@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+ *    Copyright (c) Open Connectivity Foundation (OCF), AllJoyn Open Source
+ *    Project (AJOSP) Contributors and others.
+ *    
+ *    SPDX-License-Identifier: Apache-2.0
+ *    
+ *    All rights reserved. This program and the accompanying materials are
+ *    made available under the terms of the Apache License, Version 2.0
+ *    which accompanies this distribution, and is available at
+ *    http://www.apache.org/licenses/LICENSE-2.0
+ *    
+ *    Copyright (c) Open Connectivity Foundation and Contributors to AllSeen
+ *    Alliance. All rights reserved.
+ *    
+ *    Permission to use, copy, modify, and/or distribute this software for
+ *    any purpose with or without fee is hereby granted, provided that the
+ *    above copyright notice and this permission notice appear in all
+ *    copies.
+ *    
+ *    THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL
+ *    WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED
+ *    WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE
+ *    AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL
+ *    DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR
+ *    PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER
+ *    TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
+ *    PERFORMANCE OF THIS SOFTWARE.
+-->
+<project name="apps-custom-rules" default="help">
+    <property environment="env" />
+
+    <condition property="apps.path.alljoyn" value="${env.ALLJOYN_HOME}" else="${target.path.apps}/../../alljoyn/build/android/arm/debug/dist">
+        <isset property="env.ALLJOYN_HOME" />
+    </condition>
+
+    <condition property="apps.path.base" value="${env.BASE_HOME}" else="${target.path.apps}/../../../base">
+        <isset property="env.BASE_HOME" />
+    </condition>
+
+    <condition property="apps.path.base.common.android" value="${env.BASE_HOME}" else="${apps.path.base}/sample_apps/android/common_utils/build/deploy">
+        <isset property="env.BASE_HOME" />
+    </condition>
+
+    <condition property="apps.path.base.config" value="${env.CONFIG_HOME}" else="${apps.path.base}/config/build/android/arm/debug/dist/config/jar">
+        <isset property="env.CONFIG_HOME" />
+    </condition>
+
+    <condition property="apps.path.base.notification" value="${env.NOTIFICATION_HOME}" else="${apps.path.base}/notification/build/android/arm/debug/dist/notification/jar">
+        <isset property="env.NOTIFICATION_HOME" />
+    </condition>
+
+    <condition property="apps.path.base.controlpanel" value="${env.CONTROLPANEL_HOME}" else="${apps.path.base}/controlpanel/build/android/arm/debug/dist/controlpanel/jar">
+        <isset property="env.CONTROLPANEL_HOME" />
+    </condition>
+
+    <condition property="apps.path.base.onboarding" value="${env.ONBOARDING_HOME}" else="${apps.path.base}/onboarding/build/android/arm/debug/dist/onboarding/jar">
+        <isset property="env.ONBOARDING_HOME" />
+    </condition>
+
+    <condition property="apps.path.lsf.java" value="${env.LSF_JAVA_HOME}" else="${target.path.apps}/bindings/java/LSFJava">
+        <isset property="env.LSF_JAVA_HOME" />
+    </condition>
+
+    <condition property="apps.path.lsf.java.helper" value="${env.LSF_JAVA_HELPER_HOME}" else="${target.path.apps}/helper-lib/java/LSFJavaHelper">
+        <isset property="env.LSF_JAVA_HELPER_HOME" />
+    </condition>
+
+    <property name="apps.path.so.alljoyn" value="${apps.path.alljoyn}/java/lib/liballjoyn_java.so"/>
+    <property name="apps.path.so.lsf.java" value="${apps.path.lsf.java}/libs/armeabi/liballjoyn_lsf_java.so"/>
+    <property name="apps.path.so.stl.gnu" value="${apps.path.lsf.java}/libs/armeabi/libgnustl_shared.so"/>
+
+    <property name="apps.path.jar.alljoyn" value="${apps.path.alljoyn}/java/jar/alljoyn.jar"/>
+    <property name="apps.path.jar.alljoyn.about" value="${apps.path.alljoyn}/java/jar/alljoyn_about.jar"/>
+    <property name="apps.path.jar.base.common.android" value="${apps.path.base.common.android}/alljoyn_apps_android_utils.jar"/>
+    <property name="apps.path.jar.base.config" value="${apps.path.base.config}/alljoyn_config.jar"/>
+    <property name="apps.path.jar.base.notification.service" value="${apps.path.base.notification}/NotificationService.jar"/>
+    <property name="apps.path.jar.base.notification.commons" value="${apps.path.base.notification}/NSCommons.jar"/>
+    <property name="apps.path.jar.base.notification.android" value="${apps.path.base.notification}/NSNativePlatformAndr.jar"/>
+    <property name="apps.path.jar.base.controlpanel.service" value="${apps.path.base.controlpanel}/ControlPanelService.jar"/>
+    <property name="apps.path.jar.base.controlpanel.adapter" value="${apps.path.base.controlpanel}/ControlPanelAdapter.jar"/>
+    <property name="apps.path.jar.base.onboarding" value="${apps.path.base.onboarding}/alljoyn_onboarding.jar"/>
+    <property name="apps.path.jar.base.onboarding.manager" value="${apps.path.base.onboarding}/alljoyn_onboarding_manager.jar"/>
+    <property name="apps.path.jar.lsf.java" value="${apps.path.lsf.java}/bin/lsfjava.jar"/>
+    <property name="apps.path.jar.lsf.java.helper" value="${apps.path.lsf.java.helper}/bin/lsfjavahelper.jar"/>
+
+    <path id="apps.classpath">
+        <pathelement location="${apps.path.jar.alljoyn}"/>
+        <pathelement location="${apps.path.jar.alljoyn.about}"/>
+        <pathelement location="${apps.path.jar.base.config}"/>
+        <pathelement location="${apps.path.jar.base.notification.service}"/>
+        <pathelement location="${apps.path.jar.base.notification.commons}"/>
+        <pathelement location="${apps.path.jar.base.notification.android}"/>
+        <pathelement location="${apps.path.jar.base.controlpanel.service}"/>
+        <pathelement location="${apps.path.jar.base.controlpanel.adapter}"/>
+        <pathelement location="${apps.path.jar.base.onboarding}"/>
+        <pathelement location="${apps.path.jar.base.onboarding.manager}"/>
+        <pathelement location="${apps.path.jar.lsf.java}"/>
+        <pathelement location="${apps.path.jar.lsf.java.helper}"/>
+        <pathelement location="${sdk.dir}/extras/android/support/v4/android-support-v4.jar"/>
+        <pathelement location="${sdk.dir}/extras/android/support/v13/android-support-v13.jar"/>
+    </path>
+
+    <property name="java.compiler.classpath" value="${ant.refid:apps.classpath}" />
+
+    <echo>Classpath  : ${java.compiler.classpath}</echo>
+</project>
